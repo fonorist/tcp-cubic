@@ -408,7 +408,7 @@ class ConsoleApp(Frame):
             ('Hosts', lambda: self.select('hosts')),
             ('Switches', lambda: self.select('switches')),
             ('Controllers', lambda: self.select('controllers')),
-            # ( 'CWND Graph', lambda: self.select( 'graph' ) ),
+            ('CWND Graph', lambda: self.select('graph')),
             ('Ping', self.ping),
             ('Our_test', self.our_test),
             ('Interrupt', self.stop),
