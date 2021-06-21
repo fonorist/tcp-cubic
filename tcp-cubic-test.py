@@ -459,7 +459,7 @@ class ConsoleApp(Frame):
         # TODO write the iperf3 command to run in the server at the background
         # TODO For each server host use: consoles[i].node.cmd( '??? &' )
         for i in range(count / 2):
-            consoles[i].node.cmd('iperf -s &')
+            consoles[i].node.cmd('iperf -i 1 -t 60 -s &')
 
         file_path = '/home/mininet/mininet/examples/consolesOutput/host'
         time.sleep(2)
