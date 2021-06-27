@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 """
-tcp-cubic-test.py - Based on script written by Bob Lanz - the Mininet deveoper
+tcp-cubic-test.py - Based on script written by Bob Lanz - the Mininet developer
 """
 
 import re
@@ -42,7 +42,7 @@ class DoubleSwitchTopo(Topo):
 
         # TODO: set link params between s1 and s2
         # Example: 10 Mbps, 5ms delay, 2% loss, 1000 packet queue
-        self.addLink(switch1, switch2, bw=100, delay='5ms', loss=1, max_queue_size=1000)
+        self.addLink(switch1, switch2, bw=100, loss=1, max_queue_size=1000) #delay='5ms',
 
         # self.addLink(switch1, switch2, bw=100, loss=1)
 
