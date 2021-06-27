@@ -42,7 +42,7 @@ class DoubleSwitchTopo(Topo):
 
         # TODO: set link params between s1 and s2
         # Example: 10 Mbps, 5ms delay, 2% loss, 1000 packet queue
-        self.addLink(switch1, switch2, bw=100, loss=1, max_queue_size=1000, delay='1ms')
+        self.addLink(switch1, switch2, bw=20, loss=1, max_queue_size=1000)#, delay='1ms')
 
         # self.addLink(switch1, switch2, bw=100, loss=1)
 
@@ -458,8 +458,9 @@ class ConsoleApp(Frame):
         # TODO define half of the hosts to be server
         # TODO write the iperf3 command to run in the server at the background
         # TODO For each server host use: consoles[i].node.cmd( '??? &' )
-        for i in range(count / 2):
+        for i in range((count / 2) - 1):
             consoles[i].node.cmd('iperf3 -s &')
+        consoles[(count / 2) - 1].node.cmd('iperf3 -u -s &')
 
         file_path = '/home/mininet/mininet/examples/consolesOutput/host'
         time.sleep(2)
@@ -472,9 +473,12 @@ class ConsoleApp(Frame):
         # TODO Get the iperf server IP using command like this example:   ip = consoles[i-count/2].node.IP()
         # TODO: write the iperf3 command to run in the client and redirect the results to <file_path/hostx> where x is the host number
         # TODO: For each client host use: consoles[i].sendCmd( '???? ' + ?? +  '> ' + file_path + str(i) + ' 2>&1')
-        for i in range(count / 2, count):
+        for i in range(count / 2, count - 1):
             ip = consoles[i - count / 2].node.IP()
             consoles[i].sendCmd('iperf3 -i 1 -t 60 -c ' + ip + '> ' + file_path + str(i) + ' 2>&1')
+
+        ip = consoles[count - 1 - count / 2].node.IP()
+        consoles[count - 1].sendCmd('iperf3 -i 1 -t 60 -u -c ' + ip + '> ' + file_path + str(count - 1) + ' 2>&1')
 
     def stop(self, wait=True):
         "Interrupt all hosts."
