@@ -1,8 +1,5 @@
 #!/usr/bin/python
 
-"""
-tcp-cubic-test.py - Based on script written by Bob Lanz - the Mininet developer
-"""
 
 import re
 import time
